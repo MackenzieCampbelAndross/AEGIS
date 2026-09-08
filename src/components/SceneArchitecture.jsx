@@ -134,14 +134,14 @@ export default function SceneArchitecture() {
           <div className="headline-line">
             {line1Words.map((word, i) => (
               <span key={i} className="scroll-word">
-                {word}{' '}
+                {word}
               </span>
             ))}
           </div>
           <div className="headline-line">
             {line2Words.map((word, i) => (
               <span key={i} className="scroll-word">
-                {word}{' '}
+                {word}
               </span>
             ))}
           </div>
