@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,12 +11,24 @@ import SceneThreatMatrix from './components/SceneThreatMatrix';
 import SceneArchitecture from './components/SceneArchitecture';
 import SceneRoadmap from './components/SceneRoadmap';
 import SceneFinalCta from './components/SceneFinalCta';
+import SecurityConsole from './components/SecurityConsole';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const bgLayerRef = useRef(null);
   const navbarRef = useRef(null);
+
+  // Security Console Modal state
+  const [isConsoleOpen, setIsConsoleOpen] = useState(false);
+  const [consoleTarget, setConsoleTarget] = useState(null);
+
+  const handleOpenConsole = (targetAddress = null) => {
+    if (targetAddress) {
+      setConsoleTarget(targetAddress);
+    }
+    setIsConsoleOpen(true);
+  };
 
   useEffect(() => {
     // 1. Initialize Lenis Smooth Scroll
@@ -81,13 +93,20 @@ export default function App() {
     <>
       <div className="bg-texture" id="bg-layer" ref={bgLayerRef}></div>
       <CustomCursor />
-      <Navbar ref={navbarRef} />
-      <SceneHero />
+      <Navbar ref={navbarRef} onOpenConsole={handleOpenConsole} />
+      <SceneHero onOpenConsole={handleOpenConsole} />
       <SceneGenesis />
-      <SceneThreatMatrix />
-      <SceneArchitecture />
+      <SceneThreatMatrix onOpenConsole={handleOpenConsole} />
+      <SceneArchitecture onOpenConsole={handleOpenConsole} />
       <SceneRoadmap />
-      <SceneFinalCta />
+      <SceneFinalCta onOpenConsole={handleOpenConsole} />
+
+      {/* Flagship Aegis V1 Security Console */}
+      <SecurityConsole
+        isOpen={isConsoleOpen}
+        onClose={() => setIsConsoleOpen(false)}
+        initialTarget={consoleTarget}
+      />
     </>
   );
 }

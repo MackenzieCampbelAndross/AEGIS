@@ -65,7 +65,7 @@ const PIPELINE_STAGES = [
 
 const SVG_PATH_D = 'M 90,210 C 210,80 300,340 450,210 C 600,80 690,340 810,210';
 
-export default function SceneArchitecture() {
+export default function SceneArchitecture({ onOpenConsole }) {
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const scrollTextRef = useRef(null);
@@ -313,6 +313,30 @@ export default function SceneArchitecture() {
                 </span>
                 <h3 className="annotation-title">{activeStage.title}</h3>
                 <p className="annotation-summary">{activeStage.summary}</p>
+                {onOpenConsole && (
+                  <button
+                    className="arch-action-btn interactive"
+                    onClick={() => onOpenConsole()}
+                    style={{
+                      marginTop: '1.25rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.45rem',
+                      background: 'rgba(255, 255, 255, 0.08)',
+                      border: `1px solid ${activeStage.accentColor}66`,
+                      color: '#ffffff',
+                      padding: '0.45rem 0.85rem',
+                      borderRadius: '4px',
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      transition: 'all 0.2s ease',
+                    }}
+                  >
+                    <span>SIMULATE {activeStage.name.toUpperCase()} IN CONSOLE</span>
+                    <span style={{ color: activeStage.accentColor }}>→</span>
+                  </button>
+                )}
               </motion.div>
             </AnimatePresence>
           </div>

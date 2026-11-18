@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useState } from 'react';
+import { Shield, Wallet } from 'lucide-react';
 
-const Navbar = forwardRef(function Navbar(props, ref) {
+const Navbar = forwardRef(function Navbar({ onOpenConsole }, ref) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -39,6 +40,18 @@ const Navbar = forwardRef(function Navbar(props, ref) {
         <a href="#scene-final-cta" className="interactive">
           ABOUT
         </a>
+      </div>
+      <div className="nav-right">
+        <button
+          className="nav-launch-pill interactive"
+          onClick={() => onOpenConsole && onOpenConsole()}
+          data-cursor="cta"
+          data-cursor-text="APP"
+        >
+          <span className="nav-pulse-dot"></span>
+          <Shield size={13} />
+          <span>LAUNCH CONSOLE</span>
+        </button>
       </div>
     </nav>
   );

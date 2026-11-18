@@ -61,7 +61,7 @@ const stackCards = [
   },
 ];
 
-export default function SceneThreatMatrix() {
+export default function SceneThreatMatrix({ onOpenConsole }) {
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
   const [activeCardIndex, setActiveCardIndex] = useState(0);
@@ -172,6 +172,30 @@ export default function SceneThreatMatrix() {
                     <div className="card-status-badge" style={{ color: card.color }}>
                       [STATUS] {card.status}
                     </div>
+                    {card.stage === '06' && onOpenConsole && (
+                      <button
+                        className="matrix-action-btn interactive"
+                        onClick={() => onOpenConsole()}
+                        style={{
+                          marginTop: '1rem',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          background: '#34d399',
+                          color: '#000000',
+                          border: 'none',
+                          padding: '0.55rem 1rem',
+                          borderRadius: '4px',
+                          fontFamily: "'Space Grotesk', sans-serif",
+                          fontWeight: 700,
+                          fontSize: '0.8rem',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        <span>LAUNCH ATOMIC SHIELD</span>
+                        <span>→</span>
+                      </button>
+                    )}
                   </div>
 
                   {/* Right Stage SVG Diagram */}
